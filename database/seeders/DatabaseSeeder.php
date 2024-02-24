@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1,
             'name' => 'Admin 1',
             'username' => 'admin1',
-            'email' => 'admin1@diktodo.test',
+            'email' => 'admin1@gmail.com',
             'password' => 'Admin1',
             'remember_token' => Str::random(10),
         ]);
