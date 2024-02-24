@@ -28,7 +28,7 @@
     @include('partials.navbar')
 
     {{-- main section --}}
-    <main class="py-5 w-7/12 bg-slate-200 mx-auto">
+    <main class="py-5 w-7/12 min-h-[90vh] bg-slate-200 mx-auto">
       <div class="px-5 flex justify-end mb-6">
         <span class="flex items-center gap-1 font-poppins text-sm">
           <ion-icon name="person-outline"></ion-icon> {{ auth()->user()->name }}

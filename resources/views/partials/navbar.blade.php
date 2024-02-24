@@ -3,7 +3,8 @@
   <img src="{{ asset('./image/logo_diktodo.png') }}" alt="" width="80">
   @if (auth()->user()->role_id == 1)
   <div class="nav-link flex items-center gap-5">
-    <a href="{{ route('user.todo.home') }}" class="flex gap-1 items-center font-bold hover:text-purple-800">
+    <a href="{{ route('user.todo.home') }}" wire:navigate
+      class="flex gap-1 items-center font-bold hover:text-purple-800">
       <ion-icon name="clipboard-outline"></ion-icon>
       Start New Task
     </a>
