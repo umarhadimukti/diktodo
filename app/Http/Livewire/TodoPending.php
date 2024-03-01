@@ -27,7 +27,7 @@ class TodoPending extends Component
 
     public function edit(Task $task)
     {
-        $this->id = $task->id;
+        $this->task_id = $task->id;
         $this->title = $task->title;
         $this->status = $task->status;
     }
@@ -35,12 +35,13 @@ class TodoPending extends Component
     public function update()
     {
         $this->validate([
-            'title' => 'required|min:3|string'
+            'title' => 'required|min:3|string',
         ]);
 
         $task = Task::where('id', $this->task_id);
         $task->update([
-            'title' => $this->title
+            'title' => $this->title,
+            'status' => $this->status,
         ]);
 
         // $this->reset('title');
@@ -48,9 +49,14 @@ class TodoPending extends Component
         $this->emit('taskUpdate');
     }
 
+    public function update_status()
+    {
+        $this->status = 'completed';
+        $this->emit('statusUpdate');
+    }
+
     public function delete($id)
     {
-        dd('jalan');
         $task = Task::findOrFail($id);
         $task->delete();
         session()->flash('message', 'Task Deleted!');

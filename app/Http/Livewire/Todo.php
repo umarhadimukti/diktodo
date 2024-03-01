@@ -10,6 +10,10 @@ class Todo extends Component
 {
     public $task_id, $title;
 
+    protected $listeners = [
+        'completedTaskDelete' => 'render',
+    ];
+
     public function rules()
     {
         return [

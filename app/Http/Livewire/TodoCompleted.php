@@ -13,7 +13,8 @@ class TodoCompleted extends Component
     protected $listeners = [
         'markDone' => 'render',
         'completedTaskDelete' => 'render',
-        'taskStore' => 'render',
+        'statusUpdate' => 'render',
+        'taskUpdate' => 'render',
     ];
 
     public function unmark_as_done($id)
@@ -28,7 +29,6 @@ class TodoCompleted extends Component
     public function delete($id)
     {
         $task = Task::findOrFail($id);
-        dd($task);
         $task->delete();
         session()->flash('message', 'Task Deleted!');
 
