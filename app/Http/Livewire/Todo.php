@@ -8,10 +8,10 @@ use Livewire\Component;
 
 class Todo extends Component
 {
-    public $task_id, $title;
+    public $task_id, $title, $date;
 
     protected $listeners = [
-        'completedTaskDelete' => 'render',
+        'completedTaskDelete' => 'render'
     ];
 
     public function rules()

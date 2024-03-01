@@ -8,14 +8,28 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoPending extends Component
 {
-    public $tasks, $task_id, $title, $status;
+    public $tasks, $task_id, $title, $status, $date;
 
     protected $listeners = [
         'unmarkDone' => 'render',
         'pendingTaskDelete' => 'render',
         'taskStore' => 'render',
         'taskUpdate' => 'render',
+        'dateFilter' => 'render',
     ];
+
+    public function mount()
+    {
+        $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
+    }
+
+    public function filter_date()
+    {
+        if ($this->date) {
+            $this->tasks = Task::where('user_id', Auth::user()->id)->whereDate('created_at', $this->date)->get();
+        }
+        $this->emit('dateFilter');
+    }
 
     public function mark_as_done($id)
     {
@@ -67,7 +81,7 @@ class TodoPending extends Component
     {
         // $this->tasks_pending = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
         return view('livewire.todo-pending', [
-            'tasks' => $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->get()
+            'tasks' => $this->tasks
         ]);
     }
 }

@@ -1,5 +1,16 @@
 {{-- pending tasks --}}
 <div class="list-task-pending mb-5">
+    {{-- filter date --}}
+    <div class="mb-3">
+        <label for="filterdate" class="block text-slate-700">Filter Date</label>
+        <input wire:model="date" type="date" id="filterdate"
+            class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
+        <button wire:click="filter_date()" class="px-2 py-2 bg-purple-800 text-white rounded-md hover:bg-purple-600">
+            <i class="fa-solid fa-filter"></i>
+            Filter
+        </button>
+    </div>
+    {{-- end of filter date --}}
     <h3 class="font-bold">Task Pending</h3>
     @forelse ($tasks as $task)
     <div class="task-pending p-5 mb-3 flex justify-between items-center bg-white shadow-md">
