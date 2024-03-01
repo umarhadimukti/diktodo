@@ -12,10 +12,17 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet">
+  <style>
+    [x-cloak] {
+      display: none
+    }
+  </style>
+  <!-- Alpine Plugins -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+  <!-- Include the Alpine library on your page -->
+  <script src="https://unpkg.com/alpinejs" defer></script>
   {{-- tailwind --}}
   @vite('./resources/css/app.css')
-  {{-- alpine --}}
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   {{-- fontawesome --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   {{-- ionicon --}}

@@ -5,6 +5,7 @@ use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\TaskController;
 use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Todo;
 
@@ -30,6 +31,7 @@ Route::middleware(['guest'])->group(function () {
 // untuk user biasa dan admin
 Route::prefix('todo')->name('user.todo.')->middleware(['auth'])->group(function () {
     Route::get('/', Todo::class)->name('home');
+    Route::resource('/tasks', TaskController::class);
 });
 
 // untuk admin
