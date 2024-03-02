@@ -4,7 +4,7 @@
     @forelse ($tasks as $task)
     <div class="task-completed p-5 mb-3 flex justify-between items-center bg-white shadow-md">
         <div class="w-[85%] flex items-center gap-3">
-            <i class="fa-regular fa-circle-check text-green-500"></i>
+            <i class="fa-regular fa-circle-check text-green-500 text-xl"></i>
             <h3 wire:click="unmark_as_done({{ $task->id }})" class="text-xl hover:cursor-pointer line-through">{{
                 $task->title }}</h3>
         </div>

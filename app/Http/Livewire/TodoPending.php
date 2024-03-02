@@ -11,22 +11,27 @@ class TodoPending extends Component
     public $tasks, $task_id, $title, $status, $date;
 
     protected $listeners = [
-        'unmarkDone' => 'render',
+        'markDone' => 'mount',
+        'unmarkDone' => 'mount',
         'pendingTaskDelete' => 'render',
-        'taskStore' => 'render',
-        'taskUpdate' => 'render',
+        'taskStore' => 'mount',
+        'taskUpdate' => 'mount',
         'dateFilter' => 'render',
     ];
 
     public function mount()
     {
-        $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
+        $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->orderBy('id', 'asc')->get();
+    }
+
+    public function checkDueTime() {
+        
     }
 
     public function filter_date()
     {
         if ($this->date) {
-            $this->tasks = Task::where('user_id', Auth::user()->id)->whereDate('created_at', $this->date)->get();
+            $this->tasks = Task::where('user_id', Auth::user()->id)->whereDate('created_at', $this->date)->orderBy('created_at', 'asc')->get();
         }
         $this->emit('dateFilter');
     }
@@ -80,8 +85,6 @@ class TodoPending extends Component
     public function render()
     {
         // $this->tasks_pending = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
-        return view('livewire.todo-pending', [
-            'tasks' => $this->tasks
-        ]);
+        return view('livewire.todo-pending');
     }
 }

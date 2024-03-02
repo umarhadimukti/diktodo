@@ -11,11 +11,17 @@ class TodoCompleted extends Component
     public $tasks, $task_id, $title;
 
     protected $listeners = [
-        'markDone' => 'render',
+        'markDone' => 'mount',
+        'unmarkDone' => 'mount',
         'completedTaskDelete' => 'render',
         'statusUpdate' => 'render',
-        'taskUpdate' => 'render',
+        'taskUpdate' => 'mount',
     ];
+
+    public function mount()
+    {
+        $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'completed')->get();
+    }
 
     public function unmark_as_done($id)
     {
@@ -37,8 +43,6 @@ class TodoCompleted extends Component
 
     public function render()
     {
-        return view('livewire.todo-completed', [
-            'tasks' => $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'completed')->get()
-        ]);
+        return view('livewire.todo-completed');
     }
 }
