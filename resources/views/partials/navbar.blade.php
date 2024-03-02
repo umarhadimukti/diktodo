@@ -5,11 +5,11 @@
     <a href="{{ route('user.todo.home') }}" wire:navigate
       class="flex gap-1 items-center font-bold hover:text-purple-800">
       <i class="fa-solid fa-file-pen"></i>
-      Start New Task
+      New Task
     </a>
     <a href="{{ route('admin.todo.dashboard') }}" class="flex gap-1 items-center font-bold hover:text-purple-800">
-      <i class="fa-solid fa-users-line"></i>
-      Users List
+      <i class="fa-solid fa-users"></i>
+      Users
     </a>
   </div>
   @endif

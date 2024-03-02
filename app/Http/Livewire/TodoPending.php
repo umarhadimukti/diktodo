@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Task;
+use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,8 +25,17 @@ class TodoPending extends Component
         $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->orderBy('id', 'asc')->get();
     }
 
-    public function checkDueTime() {
-        
+    public function checkDueTime($due)
+    {
+        $current_time = Carbon::now();
+        $diff_time = $current_time->diffInDays($due, false);
+        if ($diff_time < 0) {
+            return 'Terlambat ' . abs($diff_time) . ' hari';
+        } else if ($diff_time == 0) {
+            return 'Deadline hari ini';
+        } else {
+            return 'Deadline ' . abs($diff_time) . ' hari lagi';
+        }
     }
 
     public function filter_date()

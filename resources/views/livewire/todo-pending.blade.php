@@ -9,14 +9,20 @@
     </style>
 
     {{-- filter date --}}
-    <div class="mb-3">
+    <div class="mb-5">
         <label for="filterdate" class="block text-slate-700">Filter Date</label>
-        <input wire:model="date" type="date" id="filterdate"
-            class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
-        <button wire:click="filter_date()" class="px-2 py-2 bg-purple-800 text-white rounded-md hover:bg-purple-600">
-            <i class="fa-solid fa-filter"></i>
-            Filter
-        </button>
+        <div class="flex items-center gap-2">
+            <input wire:model="date" type="date" id="filterdate"
+                class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
+            <small>to</small>
+            <input wire:model="date" type="date" id="filterdate"
+                class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
+            <button wire:click="filter_date()"
+                class="px-2 py-2 bg-purple-800 text-white rounded-md hover:bg-purple-600">
+                <i class="fa-solid fa-filter"></i>
+                Filter
+            </button>
+        </div>
     </div>
     {{-- end of filter date --}}
     <h3 class="font-bold">Task Pending</h3>
@@ -26,7 +32,7 @@
             <p><small>created at: </small>{{ $task->created_at->diffForHumans() }}</p>
         </div>
         <div class="w-[50%] bg-red-600">
-            <p>{{ $task->due_at }}</p>
+            <p><small>status: </small>{{ $this->checkDueTime($task->due_at) }}</p>
         </div>
     </div>
     <div class="task-pending p-5 mb-3 flex justify-between items-center bg-white shadow-md">
