@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('title');
-            $table->text('description')->nullable(true);
             $table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->timestamp('completed_at')->nullable();
+            $table->timestamp('due_at')->nullable();
             $table->timestamps();
         });
     }

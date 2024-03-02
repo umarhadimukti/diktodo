@@ -12,6 +12,12 @@ class Task extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'completed_at' => 'datetime',
+        'due_at' => 'datetime',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

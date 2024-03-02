@@ -1,11 +1,45 @@
 {{-- pending tasks --}}
 <div class="list-task-pending mb-5">
+
+    {{-- buat sembunyiin modal yg muncul sedetik pas di refresh --}}
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+
+    {{-- filter date --}}
+    <div class="mb-5">
+        <label for="filterdate" class="block text-slate-700">Filter Date</label>
+        <div class="flex items-center gap-2">
+            <input wire:model="date" type="date" id="filterdate"
+                class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
+            <small>to</small>
+            <input wire:model="date" type="date" id="filterdate"
+                class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
+            <button wire:click="filter_date()"
+                class="px-2 py-2 bg-purple-800 text-white rounded-md hover:bg-purple-600">
+                <i class="fa-solid fa-filter"></i>
+                Filter
+            </button>
+        </div>
+    </div>
+    {{-- end of filter date --}}
     <h3 class="font-bold">Task Pending</h3>
     @forelse ($tasks as $task)
+    <div class="flex text-center text-white">
+        <div class="w-[50%] bg-purple-800">
+            <p><small>created at: </small>{{ $task->created_at->diffForHumans() }}</p>
+        </div>
+        <div class="w-[50%] bg-red-600">
+            <p><small>status: </small>{{ $this->checkDueTime($task->due_at) }}</p>
+        </div>
+    </div>
     <div class="task-pending p-5 mb-3 flex justify-between items-center bg-white shadow-md">
         <div class="w-[85%] flex items-center gap-3">
-            <i class="fa-solid fa-hourglass-half text-red-600"></i>
-            <h3 wire:click="mark_as_done({{ $task->id }})" class="text-xl hover:cursor-pointer">{{ $task->title}}
+            <i class="fa-solid fa-clock-rotate-left text-xl text-orange-700"></i>
+            <h3 wire:click="mark_as_done({{ $task->id }})" class="text-xl block hover:cursor-pointer">{{
+                $task->title}}
             </h3>
         </div>
         <div class="w-[15%] flex justify-evenly">
@@ -53,7 +87,10 @@
                                         class="ring-1 ring-slate-400 py-2 px-4 w-[300px]" value="{{ $task->title }}">
                                 </div>
                                 <div class="mb-3 flex items-center gap-1">
-                                    <input wire:click="update_status" type="checkbox" id="status">
+                                    <input wire:click="update_status" type="checkbox" id="status" @if ($task->status ==
+                                    'completed')
+                                    @checked(true) @else @checked(false)
+                                    @endif>
                                     <label for="status">Task Status (Pending or Completed)</label>
                                 </div>
                                 <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">

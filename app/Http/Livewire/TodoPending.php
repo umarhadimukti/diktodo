@@ -3,19 +3,48 @@
 namespace App\Http\Livewire;
 
 use App\Models\Task;
+use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
 class TodoPending extends Component
 {
-    public $tasks, $task_id, $title, $status;
+    public $tasks, $task_id, $title, $status, $date;
 
     protected $listeners = [
-        'unmarkDone' => 'render',
+        'markDone' => 'mount',
+        'unmarkDone' => 'mount',
         'pendingTaskDelete' => 'render',
-        'taskStore' => 'render',
-        'taskUpdate' => 'render',
+        'taskStore' => 'mount',
+        'taskUpdate' => 'mount',
+        'dateFilter' => 'render',
     ];
+
+    public function mount()
+    {
+        $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->orderBy('id', 'asc')->get();
+    }
+
+    public function checkDueTime($due)
+    {
+        $current_time = Carbon::now();
+        $diff_time = $current_time->diffInDays($due, false);
+        if ($diff_time < 0) {
+            return 'Terlambat ' . abs($diff_time) . ' hari';
+        } else if ($diff_time == 0) {
+            return 'Deadline hari ini';
+        } else {
+            return 'Deadline ' . abs($diff_time) . ' hari lagi';
+        }
+    }
+
+    public function filter_date()
+    {
+        if ($this->date) {
+            $this->tasks = Task::where('user_id', Auth::user()->id)->whereDate('created_at', $this->date)->orderBy('created_at', 'asc')->get();
+        }
+        $this->emit('dateFilter');
+    }
 
     public function mark_as_done($id)
     {
@@ -66,8 +95,6 @@ class TodoPending extends Component
     public function render()
     {
         // $this->tasks_pending = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
-        return view('livewire.todo-pending', [
-            'tasks' => $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->get()
-        ]);
+        return view('livewire.todo-pending');
     }
 }
