@@ -25,17 +25,18 @@
         </div>
     </div>
     {{-- end of filter date --}}
-    <h3 class="font-bold">Task Pending</h3>
+    <h3 class="font-bold mb-2">Task Pending</h3>
     @forelse ($tasks as $task)
     <div class="flex text-center text-white">
-        <div class="w-[50%] bg-purple-800">
+        <div class="w-[50%] bg-slate-700">
             <p><small>created at: </small>{{ $task->created_at->diffForHumans() }}</p>
         </div>
-        <div class="w-[50%] bg-red-600">
-            <p><small>status: </small>{{ $this->checkDueTime($task->due_at) }}</p>
+        <div
+            class="w-[50%] @if($this->check_color($task->due_at) == 'red') bg-red-600 @elseif($this->check_color($task->due_at) == 'orange') bg-orange-600 @else bg-green-600 @endif">
+            <p><small>status: </small>{{ $this->check_due_time($task->due_at) }}</p>
         </div>
     </div>
-    <div class="task-pending p-5 mb-3 flex justify-between items-center bg-white shadow-md">
+    <div class="task-pending p-5 mb-5 flex justify-between items-center bg-white shadow-md">
         <div class="w-[85%] flex items-center gap-3">
             <i class="fa-solid fa-clock-rotate-left text-xl text-orange-700"></i>
             <h3 wire:click="mark_as_done({{ $task->id }})" class="text-xl block hover:cursor-pointer">{{

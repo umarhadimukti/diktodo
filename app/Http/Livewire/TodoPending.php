@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoPending extends Component
 {
-    public $tasks, $task_id, $title, $status, $date;
+    public $tasks, $task_id, $title, $status, $date, $due_date, $color_status;
 
     protected $listeners = [
         'markDone' => 'mount',
@@ -22,18 +22,35 @@ class TodoPending extends Component
 
     public function mount()
     {
-        $this->tasks = Task::latest()->where('user_id', Auth::user()->id)->where('status', 'pending')->orderBy('id', 'asc')->get();
+        $this->tasks = Task::where('user_id', Auth::user()->id)->where('status', 'pending')->orderBy('due_at')->get();
     }
 
-    public function checkDueTime($due)
+    public function check_color($due)
+    {
+        $this->due_date = $due;
+        $current_time = Carbon::now();
+        $diff_time = $current_time->diffInDays($this->due_date, false);
+        if ($diff_time < 0) {
+            return 'red';
+        } elseif ($diff_time == 0) {
+            return 'orange';
+        } else {
+            return 'green';
+        }
+    }
+
+    public function check_due_time($due)
     {
         $current_time = Carbon::now();
         $diff_time = $current_time->diffInDays($due, false);
         if ($diff_time < 0) {
+            // $this->color_status = 'red';
             return 'Terlambat ' . abs($diff_time) . ' hari';
         } else if ($diff_time == 0) {
+            // $this->color_status = 'orange';
             return 'Deadline hari ini';
         } else {
+            // $this->color_status = 'green';
             return 'Deadline ' . abs($diff_time) . ' hari lagi';
         }
     }
@@ -41,7 +58,7 @@ class TodoPending extends Component
     public function filter_date()
     {
         if ($this->date) {
-            $this->tasks = Task::where('user_id', Auth::user()->id)->whereDate('created_at', $this->date)->orderBy('created_at', 'asc')->get();
+            $this->tasks = Task::where('user_id', Auth::user()->id)->whereDate('created_at', $this->date)->orderBy('due_at')->get();
         }
         $this->emit('dateFilter');
     }

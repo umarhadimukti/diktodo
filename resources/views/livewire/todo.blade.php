@@ -5,17 +5,17 @@
         <form wire:submit.prevent="store()" class="mb-5">
             @csrf
             <div class="flex justify-between items-center">
-                <div class="w-[63%]">
+                <div class="w-[68%]">
                     <input wire:model.defer="title" type="text" name="title"
                         class="w-full px-3 py-3 rounded-full focus:outline-none focus:ring-4 focus:ring-purple-500 text-[18px] @error('title') ring-4 ring-red-400 @enderror"
                         placeholder="Type your task here.." autofocus>
-                    <i class="fa-regular fa-keyboard text-xl text-slate-300 absolute top-60 right-[700px]"></i>
+                    <i class="fa-regular fa-keyboard text-xl text-slate-300 absolute top-60 right-[650px]"></i>
                 </div>
                 {{-- target date --}}
                 <div class="flex flex-col mb-5">
                     <label for="filterdate" class="block text-slate-700">Target Date</label>
                     <input wire:model="date" type="date" id="filterdate"
-                        class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md @error('date') ring-2 ring-red-500 @enderror">
+                        class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md @error('date') border-4 border-red-500 @enderror">
                     @error('date')
                     <p x-data="{dateMsg: true}" x-init="setTimeout(() => dateMsg = false, 2200)" x-show="dateMsg"
                         class="text-red-500">{{ $message }}</p>
