@@ -4,15 +4,16 @@
     @forelse ($tasks as $task)
     <div class="task-completed p-5 mb-3 flex justify-between items-center bg-white shadow-md">
         <div class="w-[85%] flex items-center gap-3">
-            <i class="fa-regular fa-circle-check text-green-500 text-xl"></i>
-            <h3 wire:click="unmark_as_done({{ $task->id }})" class="text-xl hover:cursor-pointer line-through">{{
+            <i class="fa-regular fa-circle-check text-green-500 text-sm sm:text-xl"></i>
+            <h3 wire:click="unmark_as_done({{ $task->id }})"
+                class="text-sm sm:text-xl hover:cursor-pointer line-through">{{
                 $task->title }}</h3>
         </div>
         <div class="w-[15%] flex justify-evenly">
             <div x-data="{ modalOpen: false }">
                 <a @click="modalOpen=true"
-                    class="inline-flex items-center justify-center h-10 text-sm font-medium transition-colors bg-white rounded-md hover:bg-neutral-100 hover:cursor-pointer active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"><i
-                        class="fa-regular fa-trash-can text-xl flex items-center hover:text-red-500"></i></a>
+                    class="inline-flex items-center justify-center h-10 text-sm sm:text-xl font-medium transition-colors bg-white rounded-md hover:bg-neutral-100 hover:cursor-pointer active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"><i
+                        class="fa-regular fa-trash-can flex items-center hover:text-red-500"></i></a>
 
                 {{-- <template x-teleport="body"> --}}
                     <div x-show="modalOpen"

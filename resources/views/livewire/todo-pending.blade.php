@@ -11,34 +11,39 @@
     {{-- filter date --}}
     <div class="mb-5">
         <label for="filterdate" class="block text-slate-700">Filter Date</label>
-        <div class="flex items-center gap-2">
-            <input wire:model="date" type="date" id="filterdate"
-                class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
-            <small>to</small>
-            <input wire:model="date" type="date" id="filterdate"
-                class="px-3 w-[215px] py-2 focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
-            <button wire:click="filter_date()"
-                class="px-2 py-2 bg-purple-800 text-white rounded-md hover:bg-purple-600">
+        <div class="flex flex-col xl:flex-row gap-2">
+            <div class="date-area flex justify-center gap-2 items-center">
+                <input wire:model="date" type="date" id="filterdate"
+                    class="w-[48%] text-sm sm:text-xl px-3 py-2 hover:cursor-pointer focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
+                <small class="font-bold text-slate-500">-</small>
+                <input wire:model="date" type="date" id="filterdate"
+                    class="w-[48%] text-sm sm:text-xl px-3 py-2 hover:cursor-pointer focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
+            </div>
+            <button wire:click="filter_date()" class="px-2 py-2 bg-slate-700 text-white rounded-md hover:bg-purple-600">
                 <i class="fa-solid fa-filter"></i>
                 Filter
             </button>
         </div>
     </div>
     {{-- end of filter date --}}
-    <h3 class="font-bold">Task Pending</h3>
+    <h3 class="font-bold mb-2">Task Pending</h3>
     @forelse ($tasks as $task)
-    <div class="flex text-center text-white">
-        <div class="w-[50%] bg-purple-800">
-            <p><small>created at: </small>{{ $task->created_at->diffForHumans() }}</p>
+    <div class="flex flex-col sm:flex-row text-center text-white">
+        <div class="sm:w-[50%] bg-slate-700">
+            <p class="text-[10px] py-1 sm:text-[15px]"><small>created at: </small>{{ $task->created_at->diffForHumans()
+                }}
+            </p>
         </div>
-        <div class="w-[50%] bg-red-600">
-            <p><small>status: </small>{{ $this->checkDueTime($task->due_at) }}</p>
+        <div
+            class="sm:w-[50%] text-white @if($this->check_color($task->due_at) == 'red') bg-red-500 @elseif($this->check_color($task->due_at) == 'orange') bg-orange-400 @else bg-green-500 @endif">
+            <p class="text-[10px] py-1 sm:text-[15px]"><small>status: </small>{{ $this->check_due_time($task->due_at) }}
+            </p>
         </div>
     </div>
-    <div class="task-pending p-5 mb-3 flex justify-between items-center bg-white shadow-md">
+    <div class="task-pending p-5 mb-5 flex justify-between items-center bg-white shadow-md">
         <div class="w-[85%] flex items-center gap-3">
-            <i class="fa-solid fa-clock-rotate-left text-xl text-orange-700"></i>
-            <h3 wire:click="mark_as_done({{ $task->id }})" class="text-xl block hover:cursor-pointer">{{
+            <i class="fa-solid fa-clock-rotate-left text-sm text-orange-700"></i>
+            <h3 wire:click="mark_as_done({{ $task->id }})" class="text-sm sm:text-xl block hover:cursor-pointer">{{
                 $task->title}}
             </h3>
         </div>
@@ -46,7 +51,7 @@
             <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" :class="{ 'z-40': modalOpen }"
                 class="relative w-auto h-auto">
                 <a wire:click.prevent="edit({{ $task }})" @click="modalOpen=true"
-                    class="inline-flex items-center justify-center h-10 text-xl font-medium transition-colors bg-white hover:bg-neutral-100 hover:text-green-500 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
+                    class="inline-flex items-center justify-center h-10 text-sm sm:text-xl font-medium transition-colors bg-white hover:bg-neutral-100 hover:text-green-500 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
                     <i class="fa-regular fa-pen-to-square"></i></a>
                 {{-- <template x-teleport="body"> --}}
                     <div x-show="modalOpen"
@@ -108,8 +113,8 @@
             <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" :class="{ 'z-40': modalOpen }"
                 class="relative w-auto h-auto">
                 <a @click="modalOpen=true"
-                    class="inline-flex items-center justify-center h-10 text-sm font-medium transition-colors bg-white rounded-md hover:bg-neutral-100 hover:cursor-pointer active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"><i
-                        class="fa-regular fa-trash-can text-xl flex items-center hover:text-red-500"></i></a>
+                    class="inline-flex items-center justify-center h-10 text-sm sm:text-xl font-medium transition-colors bg-white rounded-md hover:bg-neutral-100 hover:cursor-pointer active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"><i
+                        class="fa-regular fa-trash-can flex items-center hover:text-red-500"></i></a>
                 <div x-show="modalOpen"
                     class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
                     <div x-show="modalOpen" x-transition:enter="ease-out duration-300"

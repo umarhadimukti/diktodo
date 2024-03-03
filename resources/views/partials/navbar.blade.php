@@ -1,5 +1,5 @@
-<nav class="navbar w-7/12 shadow-lg bg-slate-200 mx-auto p-5 flex font-poppins justify-between">
-  <img src="{{ asset('./image/logo_diktodo.png') }}" alt="" width="80">
+<nav class="navbar w-full sm:w-11/12 xl:w-9/12 font-inconsolata bg-slate-200 mx-auto p-5 flex justify-between">
+  <img src="{{ asset('./image/logo-diktodo.png') }}" alt="" width="50">
   @if (auth()->user()->role_id == 1)
   <div class="nav-link flex items-center gap-5">
     <a href="{{ route('user.todo.home') }}" wire:navigate
