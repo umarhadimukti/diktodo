@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoPending extends Component
 {
-    public $tasks, $task_id, $title, $status, $date, $due_date, $color_status;
+    public $tasks, $task_id, $title, $status, $date, $date_to, $due_date, $color_status;
 
     protected $listeners = [
         'markDone' => 'mount',
@@ -57,9 +57,14 @@ class TodoPending extends Component
 
     public function filter_date()
     {
+        $user_id = Auth::user()->id;
+        $date1 = $this->date;
+        $date2 = $this->date_to;
         if ($this->date) {
-            $this->tasks = Task::where('user_id', Auth::user()->id)->whereDate('created_at', $this->date)->orderBy('due_at')->get();
+            $this->tasks = Task::where('user_id', $user_id)->whereDate('due_at', '>', $date1, 'AND', 'due_at', '<=', $date2)->orderBy('due_at')->get();
         }
+        $this->reset('date');
+        $this->reset('date_to');
         $this->emit('dateFilter');
     }
 

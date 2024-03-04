@@ -16,7 +16,7 @@
                 <input wire:model="date" type="date" id="filterdate"
                     class="w-[48%] text-sm sm:text-xl px-3 py-2 hover:cursor-pointer focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
                 <small class="font-bold text-slate-500">-</small>
-                <input wire:model="date" type="date" id="filterdate"
+                <input wire:model="date_to" type="date"
                     class="w-[48%] text-sm sm:text-xl px-3 py-2 hover:cursor-pointer focus:outline-none ring-2 ring-slate-300 focus:ring-4 focus:ring-slate-300 rounded-md">
             </div>
             <button wire:click="filter_date()" class="px-2 py-2 bg-slate-700 text-white rounded-md hover:bg-purple-600">
