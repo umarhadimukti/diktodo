@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Todo;
+use App\Http\Livewire\Profile;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::middleware(['guest'])->group(function () {
 // untuk user biasa dan admin
 Route::prefix('todo')->name('user.todo.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', Todo::class)->name('home');
+    Route::get('/profile', Profile::class)->name('profile');
     Route::resource('/tasks', TaskController::class);
 });
 

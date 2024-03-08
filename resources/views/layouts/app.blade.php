@@ -36,10 +36,13 @@
   <div id="app">
 
     {{-- navbar --}}
-    @include('partials.navbar')
+    {{-- @include('partials.navbar') --}}
+
+    {{-- sidebar --}}
+    @include('partials.sidebar')
 
     {{-- main section --}}
-    <main class="py-5 w-full sm:w-11/12 xl:w-9/12 min-h-[90vh] bg-slate-200 mx-auto">
+    <main class="py-5 w-full sm:w-11/12 xl:w-9/12 min-h-[100vh] bg-slate-200 mx-auto">
       <div class="px-5 w-11/12 mx-auto flex items-center justify-end mb-6">
         <span
           class="font-poppins hover:cursor-pointer hover:text-purple-700 flex items-center gap-1 text-[9px] xl:text-[13px]">
