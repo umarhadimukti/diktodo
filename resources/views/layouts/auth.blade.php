@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Todo App | Dikti</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('./image/favicon-diktodo.png') }}">
+
   {{-- google fonts --}}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@300;400;500;600&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   {{-- tailwind --}}
   @vite('./resources/css/app.css')

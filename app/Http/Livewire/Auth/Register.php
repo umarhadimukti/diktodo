@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class Register extends Component
         return [
             'name' => ['required', 'min:3', 'max:30'],
             'username' => ['required', 'min:3', 'max:30', 'unique:users'],
-            'email' => ['required', 'email:dns', 'unique:users'],
+            'email' => ['required', 'unique:users'],
             'password' => ['required', 'min:3', 'confirmed'],
         ];
     }
@@ -40,10 +41,12 @@ class Register extends Component
             'remember_token' => Str::random(10),
         ]);
 
-        // me-login-kan user yang sudah tervalidasi dan terdaftar, argumen kedua bernilai true jika ingin menggunakan fitur remember me
-        Auth::login($user, true);
+        event(new Registered($user));
 
-        return redirect()->route('redirect');
+        // me-login-kan user yang sudah tervalidasi dan terdaftar, argumen kedua bernilai true jika ingin menggunakan fitur remember me
+        Auth::login($user);
+
+        return redirect()->route('verification.notice');
     }
 
     public function render()
