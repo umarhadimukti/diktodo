@@ -1,8 +1,10 @@
-<div class="dashboard-admin font-inter">
-    <h4 class="text-xl mb-4 text-center font-inconsolata">User List</h4>
+<div class="dashboard-admin font-inconsolata">
+    {{-- <div class="wrapper mx-auto w-10/12">
+        <h4 class="text-xl mb-4 font-bold font-inconsolata">Users Table</h4>
+    </div> --}}
     <div class="list-users px-5">
         <div class="relative overflow-x-auto">
-            <table class="w-[90%] text-sm mx-auto text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table class="w-[75%] text-sm mx-auto text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">

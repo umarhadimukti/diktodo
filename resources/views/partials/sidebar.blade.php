@@ -2,11 +2,16 @@
   <div class="h-[80%] flex flex-col items-center justify-between">
     <img src="{{ asset('./image/logo-diktodo-white.png') }}" width="40">
     <div class="side-item flex flex-col space-y-8 text-slate-400 items-center mt-[100px]">
-      <a href="{{ route('user.todo.home') }}">
+      @if (auth()->user()->role_id == 1)
+      <a href="{{ route('admin.todo.dashboard') }}">
         <i class="fa-solid fa-house text-lg antialiased hover:text-slate-300 hover:cursor-pointer"></i>
       </a>
+      @endif
       <a href="{{ route('user.todo.profile') }}">
         <i class="fa-solid fa-user text-lg antialiased hover:text-slate-300 hover:cursor-pointer"></i>
+      </a>
+      <a href="{{ route('user.todo.home') }}">
+        <i class="fa-solid fa-pencil text-lg antialiased hover:text-slate-300 hover:cursor-pointer"></i>
       </a>
     </div>
     <div class="logout-item">
