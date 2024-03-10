@@ -1,8 +1,8 @@
-<nav x-data class="bg-slate-900 transition-all duration-300 transform px-2 py-4 h-screen fixed"
+<nav x-data x-cloak class="bg-slate-900 transition-all duration-300 transform px-2 py-4 h-screen fixed"
   :class="{'w-[190px]': $store.sidebar.full, 'w-10 lg:w-[80px]': !$store.sidebar.full}">
   {{-- logo --}}
   <a href="{{ route('user.todo.home') }}" class="flex justify-center">
-    <img src="{{ asset('./image/logo-diktodo-white.png') }}" alt=""
+    <img x-cloak src="{{ asset('./image/logo-diktodo-white.png') }}" alt=""
       :class="$store.sidebar.full ? 'w-[50px]' : 'w-[45px]'">
   </a>
   {{-- end of logo --}}
