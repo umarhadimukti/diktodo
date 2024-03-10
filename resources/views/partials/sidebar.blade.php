@@ -1,4 +1,11 @@
-<nav id="sidebar" class="py-5 px-1 h-screen fixed flex bg-slate-800">
+{{-- <i x-data
+  class="fa-solid fa-circle-chevron-down absolute -rotate-90 text-2xl text-slate-700 -left-1 top-10 z-50 hover:text-slate-500"></i>
+--}}
+<nav x-data id="sidebar" class="py-5 px-1 h-screen hidden sm:block sm:fixed bg-slate-800"
+  :class="{'w-64': $store.sidebar.full, 'w-64 sm:w-20': !$store.sidebar.full, 'top-0 left-0': $store.sidebar.navOpen, 'top-0 -left-64 sm:left-0': !$store.sidebar.full}">
+  <button class="hidden sm:block">
+    <i x-data class="fa-solid fa-circle-chevron-down text-2xl text-slate-700 hover:text-slate-500"></i>
+  </button>
   <div class="h-[80%] flex flex-col items-center justify-between">
     <img src="{{ asset('./image/logo-diktodo-white.png') }}" width="40">
     <div class="side-item flex flex-col space-y-8 text-slate-400 items-center mt-[100px]">

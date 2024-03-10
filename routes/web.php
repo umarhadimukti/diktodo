@@ -35,7 +35,7 @@ Route::middleware(['guest'])->group(function () {
 Route::prefix('todo')->name('user.todo.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', Todo::class)->name('home');
     Route::get('/profile', Profile::class)->name('profile');
-    Route::resource('/tasks', TaskController::class);
+Route::resource('/tasks', TaskController::class);
 });
 
 // untuk admin
