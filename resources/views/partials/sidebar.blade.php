@@ -9,7 +9,7 @@
 
   {{-- button full --}}
   <button @click="$store.sidebar.full = !$store.sidebar.full"
-    class="bg-slate-900 px-2 py-1 sm:py-2 hidden lg:block absolute top-20 -right-4 rounded-2xl">
+    class="bg-slate-900 px-2 py-1 sm:py-2 absolute top-20 -right-4 rounded-2xl">
     <i class="fa-solid fa-circle-right text-white hover:text-slate-300 text-sm sm:text-xl transition-all duration-300 transform"
       :class="$store.sidebar.full && 'rotate-180'"></i>
   </button>
