@@ -1,8 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
 
-Alpine.start()
-
 // Alpine's instance to be available everywhere
 window.Alpine = Alpine
 
