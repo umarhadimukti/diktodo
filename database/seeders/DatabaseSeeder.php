@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'umarhadimukti@gmail.com',
             'email_verified_at' => now(),
             'password' => '12344321',
+            'image' => 'fotoumar.jpg',
             'remember_token' => Str::random(10),
         ]);
         User::create([
