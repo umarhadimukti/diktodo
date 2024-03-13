@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'email' => $this->faker->freeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
+            'password_decrypt' => 'ord',
             'remember_token' => Str::random(10),
         ];
     }

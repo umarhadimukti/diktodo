@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'umarhadimukti@gmail.com',
             'email_verified_at' => now(),
             'password' => '12344321',
+            'password_decrypt' => '321',
             'image' => 'fotoumar.jpg',
             'remember_token' => Str::random(10),
         ]);
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin1@gmail.com',
             'email_verified_at' => now(),
             'password' => 'Admin1',
+            'password_decrypt' => 'in1',
             'remember_token' => Str::random(10),
         ]);
         User::create([
@@ -43,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'andrejr@gmail.com',
             'email_verified_at' => now(),
             'password' => '12344321',
+            'password_decrypt' => '321',
             'remember_token' => Str::random(10),
         ]);
     }

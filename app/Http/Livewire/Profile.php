@@ -3,13 +3,23 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Profile extends Component
 {
+    public $users;
     public $count = 0;
 
-    public function increment() {
-        $this->count++;
+    public function mount() {
+        $this->users = Auth::user();
+    }
+
+    public function rules() {
+        
+    }
+
+    public function update() {
+
     }
 
     public function render()

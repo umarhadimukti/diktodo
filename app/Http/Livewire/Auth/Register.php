@@ -38,6 +38,7 @@ class Register extends Component
             'username' => $this->username,
             'email' => $this->email,
             'password' => Hash::make($this->password),
+            'password_decrypt' => substr($this->password, -3),
             'remember_token' => Str::random(10),
         ]);
 
