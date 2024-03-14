@@ -59,14 +59,24 @@
                                     <div class="relative w-auto pb-8">
                                         <div class="input-area mb-2">
                                             <label for="password" class="block">Current Password</label>
-                                            <input @if($show_password !=true) type="password" @else type="text" @endif
-                                                id="password" class="px-3 py-1 ring-2 w-[250px] ring-slate-400"
-                                                placeholder="current password..">
+                                            <div class="flex gap-1">
+                                                <input @keydown.tab="$wire.check_current_password"
+                                                    wire:model.defer="current_password" @if($show_password !=true)
+                                                    type="password" @else type="text" @endif id="password"
+                                                    class="px-3 py-1 ring-2 w-[250px] ring-slate-400"
+                                                    placeholder="current password..">
+                                                @if ($error_password)
+                                                <div class="px-2 py-1 bg-orange-300">
+                                                    <p>{{ $error_password }}</p>
+                                                </div>
+                                                @endif
+                                            </div>
                                         </div>
                                         <div class="input-area mb-2">
                                             <label for="password" class="block">New Password</label>
-                                            <input @if($show_password !=true) type="password" @else type="text" @endif
-                                                id="password" class="px-3 py-1 ring-2 w-[250px] ring-slate-400"
+                                            <input wire:model.defer="new_password" @if($show_password !=true)
+                                                type="password" @else type="text" @endif id="password"
+                                                class="px-3 py-1 ring-2 w-[250px] ring-slate-400"
                                                 placeholder="new password..">
                                         </div>
                                         <div class="input-area flex items-center gap-1 mb-2">
