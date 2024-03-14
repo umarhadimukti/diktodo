@@ -6,17 +6,20 @@
     </style>
     <div class="flex flex-col sm:flex-row gap-8 mx-auto bg-slate-300 w-full sm:w-[70%] lg:w-[50%] p-5">
         <div class="wrapper-image w-[150px] h-[150px] overflow-hidden rounded-md">
-            <img src="{{ asset('./image/fotoumar.jpg') }}" class="w-full h-full" alt="">
+            @php
+            $image_name = './image/' . $user[0]->image
+            @endphp
+            <img src="{{ asset($image_name) }}" class="w-full h-full" alt="">
         </div>
         <div class="wrapper-info">
-            <h1 class="font-bold text-xl">{{ $users->name }}</h1>
+            <h1 class="font-bold text-xl font-poppins">{{ $user[0]->name }}</h1>
             <div class="mt-3 flex gap-2 flex-col">
-                <p><span class="font-bold">Your username:</span> {{ $users->username }}</p>
-                <p><span class="font-bold">Your email:</span> {{ $users->email }}</p>
-                <div class="flex justify-between items-center bg-slate-400 rounded px-1">
+                <p><span class="font-bold">Your username:</span> {{ $user[0]->username }}</p>
+                <p><span class="font-bold">Your email:</span> {{ $user[0]->email }}</p>
+                <div class="flex justify-between items-center bg-slate-200 px-1">
                     <div class="flex gap-2">
                         <p class="font-bold">Your Password: </p>
-                        <span>**********{{ $users->password_decrypt }}</span>
+                        <span>**********{{ $user[0]->password_decrypt }}</span>
                     </div>
                     <i class="fa-solid fa-pencil hover:text-slate-600 hover:cursor-pointer"></i>
                 </div>
@@ -24,7 +27,7 @@
                 {{-- modal ubah profile --}}
                 <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false"
                     :class="{ 'z-40': modalOpen }" class="relative w-auto h-auto">
-                    <button @click="modalOpen = true" type="button"
+                    <button wire:click.prevent="edit({{ $user[0] }})" @click="modalOpen = true" type="button"
                         class="px-3 py-1 w-full mt-5 rounded bg-purple-700 text-white ring-2 ring-purple-700 hover:text-black hover:bg-yellow-500 hover:cursor-pointer">Change
                         Profile</button>
                     {{-- <template x-teleport="body"> --}}
@@ -58,37 +61,40 @@
                                 <div class="relative sm:w-[70%] mx-auto pb-5">
                                     <div class="input-area mb-2">
                                         <label for="name" class="block">Your ID</label>
-                                        <input type="text" id="name" value="{{ $users->id }}"
+                                        <input wire:model.defer="id_user" type="text" id="name"
+                                            value="{{ $user[0]->id }}"
                                             class="px-3 py-1 ring-2 w-[250px] ring-slate-400 bg-slate-300" disabled>
                                     </div>
                                     <div class="input-area mb-2">
                                         <label for="name" class="block">Your Name</label>
-                                        <input type="text" id="name" value="{{ $users->name }}"
+                                        <input wire:model.defer="name" type="text" id="name"
+                                            value="{{ $user[0]->name }}"
                                             class="px-3 py-1 ring-2 w-[250px] ring-slate-400">
                                     </div>
                                     <div class="input-area mb-2">
                                         <label for="username" class="block">Your Username</label>
-                                        <input type="text" id="username" value="{{ $users->username }}"
+                                        <input wire:model.defer="username" type="text" id="username"
+                                            value="{{ $user[0]->username }}"
                                             class="px-3 py-1 ring-2 w-[250px] ring-slate-400">
                                     </div>
                                     <div class="input-area mb-2">
                                         <label for="email" class="block">Your Email</label>
-                                        <input type="email" id="email" value="{{ $users->email }}"
+                                        <input type="email" id="email" value="{{ $user[0]->email }}" disabled
                                             class="px-3 py-1 ring-2 w-[250px] ring-slate-400">
                                     </div>
-                                    <div class="input-area mb-2">
+                                    {{-- <div class="input-area mb-2">
                                         <label for="password" class="block">Your Password</label>
                                         <input @if($show_password !=true) type="password" @else type="text" @endif
-                                            id="password" value="{{ $users->password }}"
+                                            id="password" value="{{ $user->password }}"
                                             class="px-3 py-1 ring-2 w-[250px] ring-slate-400">
                                     </div>
                                     <div class="input-area flex items-center gap-1 mb-2">
                                         <input type="checkbox" id="show" wire:model.live="show_password">
                                         <label for="show">Show Password</label>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="flex flex-col-reverse sm:flex-row sm:space-x-2 w-[70%] mx-auto">
-                                    <button @click="modalOpen=false" type="button"
+                                    <button wire:click="update" @click="modalOpen=false" type="button"
                                         class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 bg-neutral-950 hover:bg-neutral-900">Update</button>
                                     <button @click="modalOpen=false" type="button"
                                         class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors border-2 border-slate-400 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-100 focus:ring-offset-2">Cancel</button>
