@@ -1,4 +1,4 @@
-<nav x-data x-cloak class="bg-slate-900 transition-all duration-300 transform px-2 py-4 h-screen fixed"
+<nav x-data class="bg-slate-900 z-50 transition-all duration-300 transform px-2 py-4 h-screen fixed"
   :class="{'w-[190px]': $store.sidebar.full, 'w-10 lg:w-[80px]': !$store.sidebar.full}">
   {{-- logo --}}
   <a href="{{ route('user.todo.home') }}" class="flex justify-center">
@@ -18,20 +18,21 @@
   {{-- item --}}
   <div class="mt-[150px] sm:mt-50 flex flex-col gap-20 text-white space-y-10">
     <div class="nav-item text-white space-y-10">
-      <a href="{{ route('user.todo.home') }}"
-        class="wrapper-item flex justify-center items-center hover:text-slate-300 gap-5">
-        <i class="fa-solid fa-pencil lg:text-xl"></i>
-        <h5 :class="$store.sidebar.full || 'hidden'">New Task</h5>
+      <a href="{{ route('user.todo.home') }}" class="wrapper-item flex items-center hover:text-slate-300 gap-5"
+        :class="$store.sidebar.full || 'justify-center'">
+        <i class="fa-solid fa-pencil lg:text-xl" :class="$store.sidebar.full && 'absolute right-[150px]'"></i>
+        <h5 class="absolute right-[200px] w-full" :class="$store.sidebar.full && 'left-[70px]'">New Task</h5>
+        {{-- <h5 :class="$store.sidebar.full || 'hidden'">New Task</h5> --}}
       </a>
-      <a href="{{ route('admin.todo.dashboard') }}"
-        class="wrapper-item flex justify-center items-center hover:text-slate-300 gap-5">
-        <i class="fa-solid fa-users lg:text-xl"></i>
-        <h5 :class="$store.sidebar.full || 'hidden'">List of Users</h5>
+      <a href="{{ route('admin.todo.dashboard') }}" class="wrapper-item flex items-center hover:text-slate-300 gap-5"
+        :class="$store.sidebar.full || 'justify-center'">
+        <i class="fa-solid fa-users lg:text-xl" :class="$store.sidebar.full && 'absolute right-[150px]'"></i>
+        <h5 class="absolute right-[200px] w-full" :class="$store.sidebar.full && 'left-[70px]'">List of Users</h5>
       </a>
-      <a href="{{ route('user.todo.profile') }}"
-        class="wrapper-item flex justify-center items-center hover:text-slate-300 gap-5">
-        <i class="fa-solid fa-user lg:text-xl"></i>
-        <h5 :class="$store.sidebar.full || 'hidden'">My Profile</h5>
+      <a href="{{ route('user.todo.profile') }}" class="wrapper-item flex items-center hover:text-slate-300 gap-5"
+        :class="$store.sidebar.full || 'justify-center'">
+        <i class="fa-solid fa-user lg:text-xl" :class="$store.sidebar.full && 'absolute right-[150px]'"></i>
+        <h5 class="absolute right-[200px] w-full" :class="$store.sidebar.full && 'left-[70px]'">My Profile</h5>
       </a>
     </div>
     <div class="nav-logout flex justify-center">
