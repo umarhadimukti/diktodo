@@ -7,19 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class Profile extends Component
 {
-    public $users;
+    public $users, $name, $username, $email, $password, $show_password = false;
     public $count = 0;
 
-    public function mount() {
+    public function mount()
+    {
         $this->users = Auth::user();
     }
 
-    public function rules() {
-        
+    public function rules()
+    {
     }
 
-    public function update() {
-
+    public function update()
+    {
     }
 
     public function render()
