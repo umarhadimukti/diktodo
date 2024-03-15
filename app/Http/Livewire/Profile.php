@@ -15,6 +15,7 @@ class Profile extends Component
     protected $listeners = [
         'userUpdate' => 'mount',
         'passwordUpdate' => 'mount',
+        'checkCurrentPassword' => 'render',
     ];
 
     public function mount()
@@ -23,15 +24,12 @@ class Profile extends Component
         // dd($this->user);
     }
 
-    public function check_current_password()
-    {
-        if (Hash::make($this->current_password) != $this->user[0]->password) {
-            $this->error_password = 'Password tidak cocok.';
-        }
-    }
-
     public function update_password()
     {
+        if (!Hash::check($this->current_password, $this->user[0]->password)) {
+            $this->error_password = 'Password tidak cocok.';
+            return false;
+        }
         $user = User::findOrFail($this->user[0]->id);
         $user->update(['password' => $this->new_password]);
         $this->emit('passwordUpdate');

@@ -31,6 +31,8 @@ class Register extends Component
         // validasi input user
         $this->validate();
 
+        // dd(substr($this->password, -3));
+
         // insert ke database
         $user = User::create([
             'role_id' => 2,

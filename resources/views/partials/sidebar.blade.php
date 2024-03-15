@@ -24,11 +24,13 @@
         <h5 class="absolute right-[200px] w-full" :class="$store.sidebar.full && 'left-[70px]'">New Task</h5>
         {{-- <h5 :class="$store.sidebar.full || 'hidden'">New Task</h5> --}}
       </a>
+      @can('admin')
       <a href="{{ route('admin.todo.dashboard') }}" class="wrapper-item flex items-center hover:text-slate-300 gap-5"
         :class="$store.sidebar.full || 'justify-center'">
         <i class="fa-solid fa-users lg:text-xl" :class="$store.sidebar.full && 'absolute right-[150px]'"></i>
         <h5 class="absolute right-[200px] w-full" :class="$store.sidebar.full && 'left-[70px]'">List of Users</h5>
       </a>
+      @endcan
       <a href="{{ route('user.todo.profile') }}" class="wrapper-item flex items-center hover:text-slate-300 gap-5"
         :class="$store.sidebar.full || 'justify-center'">
         <i class="fa-solid fa-user lg:text-xl" :class="$store.sidebar.full && 'absolute right-[150px]'"></i>
