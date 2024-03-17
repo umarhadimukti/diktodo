@@ -27,8 +27,7 @@ class Profile extends Component
     public function update_password()
     {
         if (!Hash::check($this->current_password, $this->user[0]->password)) {
-            $this->error_password = 'Password tidak cocok.';
-            return false;
+            return back()->with('error_message', 'Password tidak cocok.');
         }
         $user = User::findOrFail($this->user[0]->id);
         $user->update(['password' => $this->new_password]);

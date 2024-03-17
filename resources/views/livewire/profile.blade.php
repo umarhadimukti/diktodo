@@ -67,11 +67,6 @@
                                                     type="password" @else type="text" @endif id="password"
                                                     class="px-3 py-1 ring-2 w-[250px] ring-slate-400"
                                                     placeholder="current password..">
-                                                @if ($error_password)
-                                                <div class="px-2 py-1 bg-orange-300">
-                                                    <p>{{ $error_password }}</p>
-                                                </div>
-                                                @endif
                                             </div>
                                         </div>
                                         <div class="input-area mb-2">
@@ -100,6 +95,13 @@
                         </template> --}}
                     </div>
                 </div>
+
+                {{-- flash message --}}
+                @if (session()->has('error_message'))
+                <div class="w-full px-3 py-2 bg-orange-300">
+                    {{ session('error_message') }}
+                </div>
+                @endif
 
                 {{-- modal ubah profile --}}
                 <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false"
